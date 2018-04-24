@@ -1,0 +1,21 @@
+<h1>Source selection</h1>
+<ul>
+  <li>
+    <h2>From URL</h2>
+    <form>
+      <mat-form-field>
+        <input type="text" matInput placeholder="URL...">
+      </mat-form-field>
+    </form>
+  </li>
+  <li>
+    <h2>From upload</h2>
+    <form>
+      <input type="file">
+    </form>
+  </li>
+  <li>
+    <h2>Example</h2>
+    <button mat-button [routerLink]="['output', 'example', 'simple']">Try the example</button>
+  </li>
+</ul>
