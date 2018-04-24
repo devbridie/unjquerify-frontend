@@ -9,6 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { SourceSelectComponent } from './frontpage/source-select/source-select.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
+import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
 
 const appRoutes: Routes = [
@@ -30,12 +31,15 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
+    HighlightJsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [
+    HighlightJsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
