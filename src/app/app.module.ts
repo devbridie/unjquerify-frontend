@@ -9,11 +9,15 @@ import {RouterModule, Routes} from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { SourceSelectComponent } from './frontpage/source-select/source-select.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
-import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
-
+import { ResultComponent } from './result/result.component';
+import {UrlRetrieverService} from './url-retriever.service';
+import {HttpClientModule} from '@angular/common/http';
+import {HighlightModule} from 'ngx-highlightjs';
+import { DualPaneComparisonComponent } from './result/dual-pane-comparison/dual-pane-comparison.component';
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
+  {path: 'result/:type/:url', component: ResultComponent},
   { path: '', pathMatch: 'full', component: FrontpageComponent}
 ];
 
@@ -22,23 +26,26 @@ const appRoutes: Routes = [
     AppComponent,
     AboutComponent,
     SourceSelectComponent,
-    FrontpageComponent
+    FrontpageComponent,
+    ResultComponent,
+    DualPaneComparisonComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatButtonModule,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    HighlightJsModule,
+    HighlightModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     )
   ],
   providers: [
-    HighlightJsService
+    UrlRetrieverService,
   ],
   bootstrap: [AppComponent]
 })
