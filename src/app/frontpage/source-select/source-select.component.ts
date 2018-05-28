@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SourceSelectComponent implements OnInit {
 
+  selected: 'example' | 'url' | 'input' = 'example';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setSelected(selected: 'example' | 'url' | 'input') {
+    this.selected = selected;
   }
 
 }

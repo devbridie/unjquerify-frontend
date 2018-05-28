@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {RouterModule, Routes} from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { SourceSelectComponent } from './frontpage/source-select/source-select.component';
@@ -14,6 +12,8 @@ import {UrlRetrieverService} from './url-retriever.service';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightModule} from 'ngx-highlightjs';
 import { DualPaneComparisonComponent } from './result/dual-pane-comparison/dual-pane-comparison.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -32,12 +32,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
+    NgbModule.forRoot(),
     HighlightModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,

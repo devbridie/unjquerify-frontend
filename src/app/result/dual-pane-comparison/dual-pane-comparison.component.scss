@@ -1,7 +1,17 @@
 :host {
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
 }
 :host > * {
-  flex: 1;
+  width: 49%;
+}
+
+.code-pane pre {
+  white-space: pre-wrap;
+  height: 100%;
+  margin-bottom: 0;
+  code {
+    height: 100%;
+  }
 }

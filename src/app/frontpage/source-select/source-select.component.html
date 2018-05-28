@@ -1,21 +1,46 @@
 <h1>Source selection</h1>
-<ul>
-  <li>
-    <h2>From URL</h2>
-    <form>
-      <mat-form-field>
-        <input type="text" matInput placeholder="URL...">
-      </mat-form-field>
-    </form>
-  </li>
-  <li>
-    <h2>From upload</h2>
-    <form>
-      <input type="file">
-    </form>
-  </li>
-  <li>
-    <h2>Example</h2>
-    <button mat-button [routerLink]="['result', 'example', 'simple']">Try the example</button>
-  </li>
-</ul>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a href="#" [ngClass]="{'nav-link': true, active: selected ==='example'}" (click)="setSelected('example')">Example</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" [ngClass]="{'nav-link': true, active: selected ==='upload'}"
+           (click)="setSelected('upload')">Upload</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" [ngClass]="{'nav-link': true, active: selected ==='url'}" (click)="setSelected('url')">URL</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <ng-container [ngSwitch]="selected">
+      <ng-template [ngSwitchCase]="'example'">
+        <h2 class="card-title">Try an example</h2>
+        <p class="card-text">Choose from a variety of samples to get a feel for the transformations.</p>
+        <button class="btn btn-primary" [routerLink]="['result', 'example', 'simple']">Try 'simple' example</button>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'url'">
+        <h2 class="card-title">From URL</h2>
+        <p class="card-text">Use an URL to specify a target file.</p>
+        <form>
+          <div class="form-group">
+            <input type="url" placeholder="URL..." class="form-control">
+          </div>
+          <button class="btn btn-primary" [routerLink]="['result', 'url', 'example']">Continue</button>
+        </form>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'upload'">
+        <h2 class="card-title">From Upload</h2>
+        <p class="card-text">Use an uploaded file.</p>
+        <form>
+          <div class="form-group">
+            <input type="file" class="form-control-file">
+          </div>
+          <button class="btn btn-primary" [routerLink]="['result', 'url', 'example']">Continue</button>
+        </form>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
