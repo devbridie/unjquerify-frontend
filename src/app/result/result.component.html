@@ -1,1 +1,17 @@
-<app-dual-pane-comparison *ngIf="(result | async) as r" [map]="r.map" [transformed]="r.code"></app-dual-pane-comparison>
+<div class="container">
+  <h2>Result</h2>
+  <app-dual-pane-comparison *ngIf="(result | async) as r" [map]="r.map"
+                            [transformed]="r.code"></app-dual-pane-comparison>
+  <h3>Used transformations:</h3>
+  <ul>
+    <li *ngFor="let plugin of plugins">
+      <h4>{{plugin.name}}</h4>
+      {{plugin.description}}
+      <br>
+      Transforms <code>{{plugin.fromExample}}</code> to <code>{{plugin.toExample}}</code>.
+      <ul>
+        <li *ngFor="let ref of plugin.references"><a [href]="ref.url">{{ref.url}}</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
