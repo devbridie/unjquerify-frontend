@@ -4,3 +4,7 @@ app-dual-pane-comparison {
 .row {
   margin-bottom: 5px;
 }
+
+:host /deep/ .popover {
+  max-width: 500px;
+}
