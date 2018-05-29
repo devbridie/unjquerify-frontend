@@ -2,42 +2,46 @@
 <div class="card">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a href="#" [ngClass]="{'nav-link': true, active: selected ==='example'}" (click)="setSelected('example')">Example</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" [ngClass]="{'nav-link': true, disabled: true, active: selected ==='input'}">Upload</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" [ngClass]="{'nav-link': true, disabled: true, active: selected ==='url'}">URL</a>
+      <li class="nav-item" *ngFor="let type of uploadTypes">
+        <a href="#" [ngClass]="{'nav-link': true, active: selected === type}" (click)="setSelected(type)">{{type}}</a>
       </li>
     </ul>
   </div>
   <div class="card-body">
     <ng-container [ngSwitch]="selected">
-      <ng-template [ngSwitchCase]="'example'">
+      <ng-template [ngSwitchCase]="'Example'">
         <h2 class="card-title">Try an example</h2>
-        <p class="card-text">Choose from a variety of samples to get a feel for the transformations.</p>
-        <button class="btn btn-primary" [routerLink]="['result', 'example', 'simple']">Try 'simple' example</button>
+        <p class="card-subtitle text-muted mb-2">Choose from a variety of samples to get a feel for the transformations.</p>
+        <button class="btn btn-primary" [routerLink]="['result', 'example', 'simple']">unjQuerify 'simple' example</button>
       </ng-template>
-      <ng-template [ngSwitchCase]="'url'">
+      <ng-template [ngSwitchCase]="'URL'">
         <h2 class="card-title">From URL</h2>
-        <p class="card-text">Use an URL to specify a target file.</p>
+        <p class="card-subtitle text-muted mb-2">Use an URL to specify a target file.</p>
         <form>
           <div class="form-group">
             <input type="url" placeholder="URL..." class="form-control">
           </div>
-          <button class="btn btn-primary" [routerLink]="['result', 'url', 'example']">Continue</button>
+          <button class="btn btn-primary" [routerLink]="['result', 'example', 'example']">unjQuerify</button>
         </form>
       </ng-template>
-      <ng-template [ngSwitchCase]="'input'">
+      <ng-template [ngSwitchCase]="'Upload'">
         <h2 class="card-title">From Upload</h2>
-        <p class="card-text">Use an uploaded file.</p>
+        <p class="card-subtitle text-muted mb-2">Use an uploaded file.</p>
         <form>
           <div class="form-group">
             <input type="file" class="form-control-file">
           </div>
-          <button class="btn btn-primary" [routerLink]="['result', 'url', 'example']">Continue</button>
+          <button class="btn btn-primary" [routerLink]="['result', 'example', 'example']">unjQuerify</button>
+        </form>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'Input'">
+        <h2 class="card-title">From Input</h2>
+        <p class="card-subtitle text-muted mb-2">Write your code in the input box below.</p>
+        <form (submit)="submitText(textInput.value)">
+          <div class="form-group">
+            <textarea #textInput class="form-control text-monospace" placeholder="jQuery code">{{inputPlaceholder}}</textarea>
+          </div>
+          <input type="submit" class="btn btn-primary" value="unjQuerify">
         </form>
       </ng-template>
     </ng-container>

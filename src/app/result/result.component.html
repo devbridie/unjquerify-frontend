@@ -1,10 +1,10 @@
 <div class="container">
   <h2>Result</h2>
-  <app-dual-pane-comparison *ngIf="(result | async) as r" [map]="r.map"
-                            [transformed]="r.code"></app-dual-pane-comparison>
+  <app-dual-pane-comparison *ngIf="(result$ | async) as result" [map]="result.map"
+                            [transformed]="result.code"></app-dual-pane-comparison>
   <h3>Transformations</h3>
   <p class="lead">Click a transformation for an explanation...</p>
-  <ng-container *ngFor="let difference of (differences | async)">
+  <ng-container *ngFor="let difference of (differences$ | async)">
     <ng-template #popContent>
       {{difference.plugin.description}}<br><br>
       Transforms <code>{{difference.plugin.fromExample}}</code> to <code>{{difference.plugin.toExample}}</code>.<br>

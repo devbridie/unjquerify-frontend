@@ -17,6 +17,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
+  {path: 'result/:type', component: ResultComponent},
   {path: 'result/:type/:url', component: ResultComponent},
   { path: '', pathMatch: 'full', component: FrontpageComponent}
 ];

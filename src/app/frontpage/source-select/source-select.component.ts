@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+
+type UploadType = 'Example'| 'URL'| 'Input'| 'Upload';
 
 @Component({
   selector: 'app-source-select',
@@ -6,16 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./source-select.component.scss']
 })
 export class SourceSelectComponent implements OnInit {
+  uploadTypes = ['Example', 'Input', 'URL', 'Upload'];
+  selected = this.uploadTypes[0];
 
-  selected: 'example' | 'url' | 'input' = 'example';
+  inputPlaceholder = localStorage.getItem('input') || '';
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
-  setSelected(selected: 'example' | 'url' | 'input') {
+  setSelected(selected: UploadType) {
     this.selected = selected;
+    return false;
+  }
+
+  submitText(text: string) {
+    localStorage.setItem('input', text);
+    this.router.navigate(['result', 'input']);
   }
 
 }
