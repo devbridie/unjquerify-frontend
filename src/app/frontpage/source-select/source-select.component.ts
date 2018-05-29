@@ -10,6 +10,7 @@ type UploadType = 'Example'| 'URL'| 'Input'| 'Upload';
 })
 export class SourceSelectComponent implements OnInit {
   uploadTypes = ['Example', 'Input', 'URL', 'Upload'];
+  examples = ['simple', 'characterCounter'];
   selected = this.uploadTypes[0];
 
   inputPlaceholder = localStorage.getItem('input') || '';

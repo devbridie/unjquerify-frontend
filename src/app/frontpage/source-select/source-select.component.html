@@ -12,7 +12,12 @@
       <ng-template [ngSwitchCase]="'Example'">
         <h2 class="card-title">Try an example</h2>
         <p class="card-subtitle text-muted mb-2">Choose from a variety of samples to get a feel for the transformations.</p>
-        <button class="btn btn-primary" [routerLink]="['result', 'example', 'simple']">unjQuerify 'simple' example</button>
+        <div class="form-group">
+          <select class="form-control" #exampleSelect>
+            <option *ngFor="let example of examples" [value]="example">{{example}}</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" [routerLink]="['result', 'example', examples[exampleSelect.selectedIndex]]">unjQuerify</button>
       </ng-template>
       <ng-template [ngSwitchCase]="'URL'">
         <h2 class="card-title">From URL</h2>
