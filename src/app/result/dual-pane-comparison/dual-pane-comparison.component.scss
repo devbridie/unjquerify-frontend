@@ -1,14 +1,4 @@
-:host {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-}
-:host > * {
-  width: 49%;
-}
-
-.code-pane pre {
-  height: 100%;
+pre {
   margin-bottom: 0;
   code {
     height: 100%;
