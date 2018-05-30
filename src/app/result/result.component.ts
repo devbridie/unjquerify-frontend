@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UrlRetrieverService} from '../url-retriever.service';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {of} from 'rxjs';
 
 import {plugins} from 'unjquerify/build/src/all-plugins';
 import * as babel from 'babel-standalone';
 import {map, switchMap} from 'rxjs/operators';
 import {PluginWrapper} from './plugin-wrapper';
-import {CodeMutation} from './code-mutation';
 import {ActivatedRoute} from '@angular/router';
 import {ExampleRetrieverService} from '../example-retriever.service';
 
@@ -16,8 +14,27 @@ import {ExampleRetrieverService} from '../example-retriever.service';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-  result$: Observable<{ map: object, code: string }>;
-  differences$: Subject<CodeMutation[]> = new BehaviorSubject(null);
+  wrapper = new PluginWrapper();
+  babelPlugins = plugins.map(p => this.wrapper.wrapPlugin(p).babel);
+
+  code$ = this.route.paramMap.pipe(
+    switchMap(route => {
+      const inputType = route.get('type');
+      if (inputType.toLowerCase() === 'input') {
+        return of(localStorage.getItem('input') || '');
+      } else if (inputType.toLowerCase() === 'example') {
+        const file = route.get('url');
+        return this.exampleRetriever.getExample(file);
+      }
+    }),
+  );
+
+  result$ = this.code$.pipe(map(code => {
+    const result = babel.transform(code, {plugins: this.babelPlugins, sourceMaps: true, ast: false});
+    return {map: result.map, code: result.code};
+  }));
+
+  differences$ = this.result$.pipe(switchMap(() => of(this.wrapper.mutations)));
 
   constructor(private exampleRetriever: ExampleRetrieverService,
               private route: ActivatedRoute,
@@ -25,23 +42,5 @@ export class ResultComponent implements OnInit {
   }
 
   ngOnInit() {
-    const wrapper = new PluginWrapper();
-    const babelPlugins = plugins.map(p => wrapper.wrapPlugin(p).babel);
-    const code$ = this.route.paramMap.pipe(
-      switchMap(route => {
-        const inputType = route.get('type');
-        if (inputType.toLowerCase() === 'input') {
-          return of(localStorage.getItem('input') || '');
-        } else if (inputType.toLowerCase() === 'example') {
-          const file = route.get('url');
-          return this.exampleRetriever.getExample(file);
-        }
-      }),
-    );
-    this.result$ = code$.pipe(map(contents => {
-      const result = babel.transform(contents, {plugins: babelPlugins, sourceMaps: true, ast: false});
-      this.differences$.next(wrapper.mutations);
-      return {map: result.map, code: result.code};
-    }));
   }
 }
