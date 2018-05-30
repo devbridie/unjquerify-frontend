@@ -9,7 +9,7 @@ type UploadType = 'Example'| 'URL'| 'Input'| 'Upload';
   styleUrls: ['./source-select.component.scss']
 })
 export class SourceSelectComponent implements OnInit {
-  uploadTypes = ['Example', 'Input', 'URL', 'Upload'];
+  uploadTypes = ['Example', 'Input', /* 'URL', 'Upload'*/];
   examples = ['simple', 'characterCounter'];
   selected = this.uploadTypes[0];
 
