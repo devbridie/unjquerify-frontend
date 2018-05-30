@@ -8,6 +8,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {PluginWrapper} from './plugin-wrapper';
 import {CodeMutation} from './code-mutation';
 import {ActivatedRoute} from '@angular/router';
+import {ExampleRetrieverService} from '../example-retriever.service';
 
 @Component({
   selector: 'app-result',
@@ -18,7 +19,7 @@ export class ResultComponent implements OnInit {
   result$: Observable<{ map: object, code: string }>;
   differences$: Subject<CodeMutation[]> = new BehaviorSubject(null);
 
-  constructor(private urlRetriever: UrlRetrieverService,
+  constructor(private exampleRetriever: ExampleRetrieverService,
               private route: ActivatedRoute,
   ) {
   }
@@ -33,7 +34,7 @@ export class ResultComponent implements OnInit {
           return of(localStorage.getItem('input') || '');
         } else if (inputType.toLowerCase() === 'example') {
           const file = route.get('url');
-          return this.urlRetriever.getUrlContents('/assets/examples/' + file + '.txt');
+          return this.exampleRetriever.getExample(file);
         }
       }),
     );
