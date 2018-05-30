@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UrlRetrieverService} from '../url-retriever.service';
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 
 import {plugins} from 'unjquerify/build/src/all-plugins';
 import * as babel from 'babel-standalone';
@@ -16,10 +16,11 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ResultComponent implements OnInit {
   result$: Observable<{ map: object, code: string }>;
-  differences$: Subject<CodeMutation[]> = new Subject();
+  differences$: Subject<CodeMutation[]> = new BehaviorSubject(null);
 
   constructor(private urlRetriever: UrlRetrieverService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+  ) {
   }
 
   ngOnInit() {
