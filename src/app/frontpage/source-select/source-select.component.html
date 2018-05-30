@@ -3,21 +3,24 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" *ngFor="let type of uploadTypes">
-        <a href="#" [ngClass]="{'nav-link': true, active: selected === type}" (click)="setSelected(type)">{{type}}</a>
+        <a href="#" [ngClass]="{'nav-link': true, active: (selected$ | async) === type}" (click)="selectedUploadType$.next(type); false">{{type}}</a>
       </li>
     </ul>
   </div>
   <div class="card-body">
-    <ng-container [ngSwitch]="selected">
+    <ng-container [ngSwitch]="selectedUploadType$ | async">
       <ng-template [ngSwitchCase]="'Example'">
         <h2 class="card-title">Try an example</h2>
         <p class="card-subtitle text-muted mb-2">Choose from a variety of samples to get a feel for the transformations.</p>
         <div class="form-group">
-          <select class="form-control" #exampleSelect>
+          <select class="form-control" (change)="selectedExample$.next($event.target.value)">
             <option *ngFor="let example of examples" [value]="example">{{example}}</option>
           </select>
         </div>
-        <button class="btn btn-primary" [routerLink]="['result', 'example', examples[exampleSelect.selectedIndex]]">unjQuerify</button>
+        <div class="form-group">
+          <pre class="form-control"><code highlight [textContent]="exampleCode$ | async"></code></pre>
+        </div>
+        <button class="btn btn-primary" [routerLink]="['result', 'example', selectedExample$ | async]">unjQuerify</button>
       </ng-template>
       <ng-template [ngSwitchCase]="'URL'">
         <h2 class="card-title">From URL</h2>
