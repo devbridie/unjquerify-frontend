@@ -3,7 +3,7 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" *ngFor="let type of uploadTypes">
-        <a href="#" [ngClass]="{'nav-link': true, active: (selected$ | async) === type}" (click)="selectedUploadType$.next(type); false">{{type}}</a>
+        <a href="#" [ngClass]="{'nav-link': true, active: (selectedUploadType$ | async) === type}" (click)="selectedUploadType$.next(type); false">{{type}}</a>
       </li>
     </ul>
   </div>
