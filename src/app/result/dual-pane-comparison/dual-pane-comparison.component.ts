@@ -6,16 +6,16 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./dual-pane-comparison.component.scss']
 })
 export class DualPaneComparisonComponent implements OnInit {
-  original: string;
   @Input()
-  map: { sourcesContent: string; };
+  original: string;
+
   @Input()
   transformed: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.original = this.map.sourcesContent;
   }
 
 }

@@ -31,6 +31,7 @@ export class ResultComponent implements OnInit {
 
   result$ = this.code$.pipe(map(code => {
     const result = babel.transform(code, {plugins: this.babelPlugins, sourceMaps: true, ast: false});
+    console.log(result);
     return {map: result.map, code: result.code};
   }));
 

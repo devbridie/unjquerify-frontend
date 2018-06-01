@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Result</h2>
   <app-dual-pane-comparison *ngIf="(result$ | async) as result"
-                            [map]="result.map"
+                            [original]="code$ | async"
                             [transformed]="result.code"></app-dual-pane-comparison>
   <ng-container *ngIf="(differences$ | async) as differences">
     <h3>Transformations</h3>
@@ -15,10 +15,11 @@
           <li *ngFor="let ref of difference.plugin.references"><a [href]="ref.url">{{ref.url}}</a></li>
         </ul>
       </ng-template>
-      <div class="row" [ngbPopover]="popContent" [popoverTitle]="difference.plugin.name">
-        <pre class="col-6"><code highlight [code]="difference.from"></code></pre>
-        <pre class="col-6"><code highlight [code]="difference.to"></code></pre>
+      <div class="row mb-md-4" [ngbPopover]="popContent" [popoverTitle]="difference.plugin.name">
+        <pre class="col-12 col-md-6 mb-2 mb-md-0"><code highlight [code]="difference.from"></code></pre>
+        <pre class="col-12 col-md-6 mb-0"><code highlight [code]="difference.to"></code></pre>
       </div>
+      <hr class="d-block d-md-none" />
     </ng-container>
   </ng-container>
 </div>

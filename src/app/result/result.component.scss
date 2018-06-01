@@ -1,8 +1,15 @@
 app-dual-pane-comparison {
+  display: block;
   margin-bottom: 10px;
 }
-.row {
-  margin-bottom: 5px;
+
+code {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+pre {
+  overflow-y: hidden;
 }
 
 :host /deep/ .popover {
