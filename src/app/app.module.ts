@@ -13,12 +13,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {HighlightModule} from 'ngx-highlightjs';
 import { DualPaneComparisonComponent } from './result/dual-pane-comparison/dual-pane-comparison.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DocumentationComponent } from './documentation/documentation.component';
+import { PluginDetailsComponent } from './documentation/plugin-details/plugin-details.component';
 
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   {path: 'result/:type', component: ResultComponent},
   {path: 'result/:type/:url', component: ResultComponent},
+  {path: 'documentation', component: DocumentationComponent},
+  {path: 'documentation/plugin/:name', component: PluginDetailsComponent},
   { path: '', pathMatch: 'full', component: FrontpageComponent}
 ];
 
@@ -29,7 +33,9 @@ const appRoutes: Routes = [
     SourceSelectComponent,
     FrontpageComponent,
     ResultComponent,
-    DualPaneComparisonComponent
+    DualPaneComparisonComponent,
+    DocumentationComponent,
+    PluginDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Documentation</h2>
+  <h3>Plugins</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let plugin of plugins" [routerLink]="['/documentation/plugin', plugin.name]">
+      <th scope="row">{{plugin.name}}</th>
+      <td>{{plugin.description}}</td>
+      <td><pre><code highlight [code]="plugin.fromExample"></code></pre></td>
+      <td><pre><code highlight [code]="plugin.toExample"></code></pre></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

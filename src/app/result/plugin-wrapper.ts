@@ -48,6 +48,7 @@ export class PluginWrapper {
   wrapPlugin(plugin: Plugin): Plugin {
     return {
       toExample: plugin.toExample,
+      path: plugin.path,
       fromExample: plugin.fromExample,
       name: plugin.name,
       description: plugin.description,
