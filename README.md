@@ -7,6 +7,7 @@ It uses [unjquerify](https://github.com/devbridie/unjquerify) as a source for pl
 * Ensure that `npm` is available.
 * As [`unjquerify`](https://github.com/devbridie/unjquerify) is still unpublished, it must be built manually. Ensure it is built in a directory next to this one by cloning it and building it.
 * Use `npm install` to install dependencies.
+* Use `npm run copy-sources` to copy documentation from the local `unjquerify` project to the project assets.
 * Use `npx ng serve --open` to run a local development server. This will open a browser pointed to a local development copy of `unjquerify-frontend`.
 
 ## Contributing
