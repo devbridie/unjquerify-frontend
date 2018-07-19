@@ -9,4 +9,4 @@ declare module '*!txt' {
   export default content;
 }
 
-declare var require: any;
+// declare var require: any;

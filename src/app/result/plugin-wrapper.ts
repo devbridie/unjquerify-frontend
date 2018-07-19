@@ -1,61 +1,40 @@
-import {Node} from 'babel-types';
+import {blockStatement, callExpression, Expression, identifier, memberExpression} from 'babel-types';
 import generate from 'babel-generator';
-import {NodePath, Visitor} from 'babel-traverse';
+import {Scope} from 'babel-traverse';
 import {Plugin} from 'unjquerify/build/src/model/plugin';
 import {CodeMutation} from './code-mutation';
+import {CallExpressionOfjQueryCollection} from 'unjquerify/build/src/model/matchers/call-expression-of-jquery-collection';
 
 export class PluginWrapper {
   constructor(public mutations: CodeMutation[] = []) {
-  }
-
-  private wrapTransformer(plugin: Plugin, original: (path: NodePath) => void): (path: NodePath) => void {
-    return (path: NodePath) => {
-      const originalCode = generate(path.node).code;
-      original(path);
-      try { // try catch needed here because some transformations can kill path.node (by replacing its parent)
-        const afterCode = generate(path.node).code;
-        if (originalCode !== afterCode) {
-          this.mutations.push({plugin: plugin, from: originalCode, to: afterCode});
-        }
-      } catch (e) {
-      }
-    };
-  }
-
-  private wrapVisitor(plugin: Plugin, visitor: Visitor<Node>): Visitor<Node> {
-    const newVisitor = {};
-    const names = Object.keys(visitor);
-
-    for (const name of names) {
-      const original = visitor[name];
-      if (original instanceof Function) {
-        newVisitor[name] = this.wrapTransformer(plugin, original);
-      } else {
-        const newInner = {};
-        const innerNames = Object.keys(original);
-        for (const innerName of innerNames) {
-          newInner[innerName] = this.wrapTransformer(plugin, original[innerName]);
-        }
-        newVisitor[name] = newInner;
-      }
-    }
-    return newVisitor as Visitor<Node>;
   }
 
   /**
    * Wraps a plugin to listen for AST changes.
    */
   wrapPlugin(plugin: Plugin): Plugin {
-    return {
-      toExample: plugin.toExample,
-      path: plugin.path,
-      fromExample: plugin.fromExample,
-      name: plugin.name,
-      description: plugin.description,
-      references: plugin.references,
-      babel: () => ({
-        visitor: this.wrapVisitor(plugin, plugin.babel().visitor)
-      })
+    const copy = Object.assign({}, plugin);
+    const original = plugin.replaceWith;
+    copy.replaceWith = (element: Expression, args: Expression[], scope: Scope) => {
+      const out = original(element, args, scope);
+      if (plugin.matchesExpressionType instanceof CallExpressionOfjQueryCollection) {
+        const name = plugin.matchesExpressionType.methodName;
+        const fromAst = callExpression(memberExpression(element, identifier(name)), args);
+        let outCode;
+        if (Array.isArray(out)) {
+          outCode = generate(blockStatement(out)).code;
+        } else {
+          outCode = generate(out).code;
+        }
+        this.mutations.push({
+          plugin: plugin,
+          from: generate(fromAst).code,
+          to: outCode
+        });
+        console.log(this.mutations);
+      }
+      return out;
     };
+    return copy;
   }
 }

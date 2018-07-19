@@ -7,6 +7,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {PluginWrapper} from './plugin-wrapper';
 import {ActivatedRoute} from '@angular/router';
 import {ExampleRetrieverService} from '../example-retriever.service';
+import {jQueryExpressionPlugin} from 'unjquerify/build/src/plugins/jquery-expression.plugin';
 
 @Component({
   selector: 'app-result',
@@ -15,7 +16,7 @@ import {ExampleRetrieverService} from '../example-retriever.service';
 })
 export class ResultComponent implements OnInit {
   wrapper = new PluginWrapper();
-  babelPlugins = plugins.map(p => this.wrapper.wrapPlugin(p).babel);
+  babelPlugins = plugins.map(p => this.wrapper.wrapPlugin(p));
 
   code$ = this.route.paramMap.pipe(
     switchMap(route => {
@@ -30,8 +31,7 @@ export class ResultComponent implements OnInit {
   );
 
   result$ = this.code$.pipe(map(code => {
-    const result = babel.transform(code, {plugins: this.babelPlugins, sourceMaps: true, ast: false});
-    console.log(result);
+    const result = babel.transform(code, {plugins: [jQueryExpressionPlugin(this.babelPlugins)], sourceMaps: true, ast: false});
     return {map: result.map, code: result.code};
   }));
 
