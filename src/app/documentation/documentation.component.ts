@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {plugins} from 'unjquerify/build/src/all-plugins';
+import {allDocumentation} from './plugins/all-documentation';
 
 @Component({
   selector: 'app-documentation',
@@ -7,7 +7,7 @@ import {plugins} from 'unjquerify/build/src/all-plugins';
   styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent implements OnInit {
-  plugins = plugins;
+  documentations = allDocumentation;
 
   constructor() { }
 

@@ -11,11 +11,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let plugin of plugins" [routerLink]="['/documentation/plugin', plugin.name]">
-      <th scope="row">{{plugin.name}}</th>
-      <td>{{plugin.description}}</td>
-      <td><pre><code highlight [code]="plugin.fromExample"></code></pre></td>
-      <td><pre><code highlight [code]="plugin.toExample"></code></pre></td>
+    <tr *ngFor="let doc of documentations" [routerLink]="['/documentation/plugin', doc.name]">
+      <th scope="row">{{doc.name}}</th>
+      <td>{{doc.description}}</td>
+      <td><pre><code highlight [code]="doc.fromExample"></code></pre></td>
+      <td><pre><code highlight [code]="doc.toExample"></code></pre></td>
     </tr>
     </tbody>
   </table>

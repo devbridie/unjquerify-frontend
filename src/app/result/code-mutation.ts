@@ -1,7 +1,7 @@
-import {Plugin} from 'unjquerify/build/src/model/plugin';
+import {PluginDocumentation} from '../documentation/plugins/plugin-documentation';
 
 export interface CodeMutation {
-  plugin: Plugin;
+  docs: PluginDocumentation;
   from: string;
   to: string;
 }

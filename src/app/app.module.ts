@@ -44,7 +44,7 @@ const appRoutes: Routes = [
     HighlightModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
+      { enableTracing: true } // <-- debugging purposes only
     )
   ],
   providers: [

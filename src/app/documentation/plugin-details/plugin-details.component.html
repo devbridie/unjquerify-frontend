@@ -1,20 +1,20 @@
 <div class="container">
-  <ng-container *ngIf="(plugin$ | async) as plugin">
-    <h2>{{plugin.name}}</h2>
-    <p class="lead">{{plugin.description}}</p>
+  <ng-container *ngIf="(pluginDocumentation$ | async) as documentation">
+    <h2>{{documentation.name}}</h2>
+    <p class="lead">{{documentation.description}}</p>
     <h3>Usage</h3>
     <div class="row">
-      <pre class="col-6"><code highlight [code]="plugin.fromExample"></code></pre>
-      <pre class="col-6"><code highlight [code]="plugin.toExample"></code></pre>
+      <pre class="col-6"><code highlight [code]="documentation.fromExample"></code></pre>
+      <pre class="col-6"><code highlight [code]="documentation.toExample"></code></pre>
     </div>
     <h3>Live example</h3>
     <div class="row mb-4">
-      <div class="col-6"><textarea class="text-monospace form-control" placeholder="Code" (keyup)="example$.next($event.target.value)">{{plugin.fromExample}}</textarea></div>
+      <div class="col-6"><textarea class="text-monospace form-control" placeholder="Code" (keyup)="example$.next($event.target.value)">{{documentation.fromExample}}</textarea></div>
       <pre class="col-6"><code highlight [code]="(exampleOutput$ | async)"></code></pre>
     </div>
     <h3>References</h3>
     <ul>
-      <li *ngFor="let reference of plugin.references"><a [href]="reference.url">{{reference.url}}</a></li>
+      <li *ngFor="let reference of documentation.references"><a [href]="reference.url">{{reference.url}}</a></li>
     </ul>
     <ng-container *ngIf="(source$ | async) as source">
       <h3>Source <a href="https://github.com/devbridie/unjquerify/tree/master/{{path$ | async}}" class="badge badge-secondary">GitHub</a></h3>
