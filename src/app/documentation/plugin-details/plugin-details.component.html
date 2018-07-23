@@ -14,7 +14,7 @@
     </div>
     <h3>References</h3>
     <ul>
-      <li *ngFor="let reference of documentation.references"><a [href]="reference.url">{{reference.url}}</a></li>
+      <li *ngFor="let reference of documentation.references"><a [href]="reference.url" [innerHtml]="reference.display"></a></li>
     </ul>
     <ng-container *ngIf="(source$ | async) as source">
       <h3>Source <a href="https://github.com/devbridie/unjquerify/tree/master/{{path$ | async}}" class="badge badge-secondary">GitHub</a></h3>

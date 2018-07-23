@@ -12,7 +12,7 @@
         Transforms <code>{{difference.docs.fromExample}}</code> to <code>{{difference.docs.toExample}}</code>.<br>
         <h4 class="h5">References</h4>
         <ul>
-          <li *ngFor="let ref of difference.docs.references"><a [href]="ref.url">{{ref.url}}</a></li>
+          <li *ngFor="let ref of difference.docs.references"><a [href]="ref.url" [innerHtml]="ref.display"></a></li>
         </ul>
       </ng-template>
       <div class="row mb-md-4 difference" [ngbPopover]="popContent" [popoverTitle]="difference.docs.name">
