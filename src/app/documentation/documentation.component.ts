@@ -7,7 +7,7 @@ import {allDocumentation} from './plugins/all-documentation';
   styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent implements OnInit {
-  documentations = allDocumentation;
+  documentations = allDocumentation.sort((a, b) => a.name.localeCompare(b.name));
 
   constructor() { }
 

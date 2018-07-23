@@ -18,6 +18,16 @@ import {GetElementsByClassNamePluginDocumentation} from './selectors/getElements
 import {QuerySelectorAllPluginDocumentation} from './selectors/querySelectorAll.plugin';
 import {IsPluginDocumentation} from './traversing/filtering/is.plugin';
 import {FindPluginDocumentation} from './traversing/tree-traversal/find.plugin';
+import {HasClassPluginDocumentation} from './attributes/hasclass.plugin';
+import {RemoveClassPluginDocumentation} from './attributes/removeclass.plugin';
+import {ToggleClassPluginDocumentation} from './attributes/toggleclass.plugin';
+import {ValGetPluginDocumentation} from './attributes/val.get.plugin';
+import {ValSetPluginDocumentation} from './attributes/val.set.plugin';
+import {HeightGetPluginDocumentation} from './dimensions/height.get.plugin';
+import {ContentsPluginDocumentation} from './traversing/miscellaneous-traversing/contents.plugin';
+import {NextPluginDocumentation} from './traversing/tree-traversal/next.plugin';
+import {PrevPluginDocumentation} from './traversing/tree-traversal/prev.plugin';
+import {SiblingsPluginDocumentation} from './traversing/tree-traversal/siblings.plugin';
 
 export const allDocumentation: PluginDocumentation[] = [
   AddClassPluginDocumentation,
@@ -38,5 +48,15 @@ export const allDocumentation: PluginDocumentation[] = [
   GetElementsByClassNamePluginDocumentation,
   QuerySelectorAllPluginDocumentation,
   IsPluginDocumentation,
-  FindPluginDocumentation
+  FindPluginDocumentation,
+  HasClassPluginDocumentation,
+  RemoveClassPluginDocumentation,
+  ToggleClassPluginDocumentation,
+  ValGetPluginDocumentation,
+  ValSetPluginDocumentation,
+  HeightGetPluginDocumentation,
+  ContentsPluginDocumentation,
+  NextPluginDocumentation,
+  PrevPluginDocumentation,
+  SiblingsPluginDocumentation,
 ];

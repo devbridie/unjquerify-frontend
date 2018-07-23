@@ -12,6 +12,6 @@ export const GetElementsByClassNamePluginDocumentation: PluginDocumentation = {
     youDontNeedJquery('1.1'),
   ],
   fromExample: `$(".<class>")`,
-  toExample: `$(document.getElementsByClassName("<class>"))`,
+  toExample: `document.getElementsByClassName("<class>")`,
   description: `Converts $(".<class>") calls.`,
 };

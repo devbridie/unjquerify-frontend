@@ -12,6 +12,6 @@ export const QuerySelectorAllPluginDocumentation: PluginDocumentation = {
     youDontNeedJquery('1.0'),
   ],
   fromExample: `$("<selector>")`,
-  toExample: `$(document.querySelectorAll("<selector>"))`,
+  toExample: `document.querySelectorAll("<selector>")`,
   description: `Converts $("<selector>") calls.`,
 };

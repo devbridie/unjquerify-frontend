@@ -12,6 +12,6 @@ export const AddClassPluginDocumentation: PluginDocumentation = {
     youDontNeedJquery('2.1'),
   ],
   fromExample: `$el.addClass("selected")`,
-  toExample: `el.classList.add(className)`,
+  toExample: `el.classList.add("selected")`,
   description: `Converts $el.addClass calls.`,
 };
