@@ -1,6 +1,6 @@
 {
   "name": "unjquerify-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "copy-sources": "git clone ../unjquerify src/assets/unjquerify-source"
+    "copy-sources": "git clone https://github.com/devbridie/unjquerify.git src/assets/unjquerify-source"
   },
   "private": true,
   "dependencies": {
@@ -28,7 +28,7 @@
     "highlight.js": "^9.12.0",
     "ngx-highlightjs": "^2.0.2",
     "rxjs": "^6.2.0",
-    "unjquerify": "file:../unjquerify",
+    "unjquerify": "^1.0.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
