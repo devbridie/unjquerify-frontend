@@ -17,7 +17,7 @@
           </select>
         </div>
         <div class="form-group">
-          <pre class="form-control"><code highlight [textContent]="exampleCode$ | async"></code></pre>
+          <pre><code highlight [textContent]="exampleCode$ | async"></code></pre>
         </div>
         <button class="btn btn-primary" [routerLink]="['result', 'example', selectedExample$ | async]">unjQuerify</button>
       </ng-template>
